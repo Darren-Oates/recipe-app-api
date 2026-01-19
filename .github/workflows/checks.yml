@@ -1,5 +1,3 @@
----
-
 name: Checks
 
 on:
@@ -20,7 +18,6 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USER }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # Optional but VERY useful while learning/debugging
       - name: Debug Docker versions
         run: |
           docker --version
@@ -31,4 +28,5 @@ jobs:
         run: docker compose run --rm app sh -c "python app/manage.py test"
 
       - name: Run Lint
-        run: docker compose run --rm app sh -c "flake8"
+        run: docker compose run --rm app sh -c "flake8 --config app/.flake8 app"
+
